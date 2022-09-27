@@ -65,12 +65,47 @@ int getNeighbors(int** grid, int i, int j, int linhas, int colunas) {
   return vivos;
 }
 
+void nova_geracao(int*** grid, int*** newgrid, int linhas, int colunas){
+  int vivos;
+  
+  for(int i=0;i<linhas;i++){
+    for(int j=0;j<colunas;j++){
+      vivos = getNeighbors((*grid), i, j, linhas, colunas);
+      //printf("%d %d\n", (*grid)[i][j], vivos);
+      if((*grid)[i][j] == 1 && vivos == 2 || vivos == 3){
+        (*newgrid)[i][j] = 1;
+      } else if((*grid)[i][j] == 0 && vivos == 3){
+        printf("aa");
+        (*newgrid)[i][j] = 1;
+      } else{
+        (*newgrid)[i][j] = 0;
+      }
+    }
+  }
+  
+  for(int i=0;i<linhas;i++){
+    for(int j=0;j<colunas;j++){
+      (*grid)[i][j] = (*newgrid)[i][j];
+    }
+  }
+}
+
+int soma_celulas(int*** grid, int linhas, int colunas){
+  int soma = 0;
+  for(int i=0;i<linhas;i++){
+    for(int j=0;j<colunas;j++){
+      soma += (*grid)[i][j];
+    }
+  }
+  return soma;
+}
+
 int main(void) {
 
   int i, j;
-  int linhas = 5;
-  int colunas = 10;
-  int geracoes = 10;
+  int linhas = 50;
+  int colunas = 50;
+  int geracoes = 2000;
 
   int **grid, **newgrid;
   aloca_matriz(linhas, colunas, &grid, &newgrid);
@@ -83,13 +118,31 @@ int main(void) {
   grid[lin+2][col+1] = 1;
   grid[lin+2][col+2] = 1;
 
-  
-  
+  //R-pentomino
+  lin =10; col = 30;
+  grid[lin  ][col+1] = 1;
+  grid[lin  ][col+2] = 1;
+  grid[lin+1][col  ] = 1;
+  grid[lin+1][col+1] = 1;
+  grid[lin+2][col+1] = 1;
+
+
+  // int vivos = getNeighbors(grid, 2, 2, linhas, colunas);
+  // printf("%d\n", vivos);
   for(i=0; i<linhas; i++){
-    for(j=0; j<colunas; j++){
-      printf("%d", grid[i][j]);
+      for(j=0; j<colunas; j++){
+        printf("%d", grid[i][j]);
+      }
+      printf("\n");
     }
     printf("\n");
+  for(int k=0; k<geracoes; k++){
+    nova_geracao(&grid, &newgrid, linhas, colunas);
   }
+  
+  int total = soma_celulas(&grid, linhas, colunas);
+  printf("%d", total);
+
+  
   
 }
