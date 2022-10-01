@@ -72,7 +72,7 @@ void nova_geracao(int*** grid, int*** newgrid, int linhas, int colunas){
       vivos = getNeighbors((*grid), i, j, linhas, colunas);
       if((*grid)[i][j] == 1 && vivos == 2 || vivos == 3){
         (*newgrid)[i][j] = 1;
-      } else if((*grid)[i][j] == 0 && vivos == 3){
+      } else if((*grid)[i][j] == 0 && vivos == 3 || vivos ==6){
         (*newgrid)[i][j] = 1;
       } else{
         (*newgrid)[i][j] = 0;
