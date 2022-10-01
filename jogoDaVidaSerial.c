@@ -59,7 +59,6 @@ int getNeighbors(int** grid, int i, int j, int linhas, int colunas) {
       }
       
     }
-    //printf("\n");
   }
   if(grid[i][j] == 1){ vivos--;}
   return vivos;
@@ -71,11 +70,9 @@ void nova_geracao(int*** grid, int*** newgrid, int linhas, int colunas){
   for(int i=0;i<linhas;i++){
     for(int j=0;j<colunas;j++){
       vivos = getNeighbors((*grid), i, j, linhas, colunas);
-      //printf("%d %d\n", (*grid)[i][j], vivos);
       if((*grid)[i][j] == 1 && vivos == 2 || vivos == 3){
         (*newgrid)[i][j] = 1;
       } else if((*grid)[i][j] == 0 && vivos == 3){
-        printf("aa");
         (*newgrid)[i][j] = 1;
       } else{
         (*newgrid)[i][j] = 0;
@@ -102,9 +99,9 @@ int soma_celulas(int*** grid, int linhas, int colunas){
 
 int main(void) {
 
-  int i, j;
-  int linhas = 50;
-  int colunas = 50;
+  //int i, j;
+  int linhas = 2048;
+  int colunas = 2048;
   int geracoes = 2000;
 
   int **grid, **newgrid;
@@ -127,15 +124,14 @@ int main(void) {
   grid[lin+2][col+1] = 1;
 
 
-  // int vivos = getNeighbors(grid, 2, 2, linhas, colunas);
-  // printf("%d\n", vivos);
-  for(i=0; i<linhas; i++){
+
+  /* for(i=0; i<linhas; i++){
       for(j=0; j<colunas; j++){
         printf("%d", grid[i][j]);
       }
       printf("\n");
     }
-    printf("\n");
+    printf("\n"); */
   for(int k=0; k<geracoes; k++){
     nova_geracao(&grid, &newgrid, linhas, colunas);
   }
