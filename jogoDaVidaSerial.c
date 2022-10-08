@@ -96,7 +96,7 @@ int main(void) {
   gettimeofday(&inicio, NULL);
   int linhas = 2048;
   int colunas = 2048;
-  int geracoes = 500;
+  int geracoes = 2000;
 
   int **grid, **newgrid;
   aloca_matriz(linhas, colunas, &grid, &newgrid);
